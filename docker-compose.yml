@@ -68,17 +68,17 @@ services:
     ports:
       - "127.0.0.1:3000:3000"
 
-  worker:
-    <<: *app
-    command: bundle exec sidekiq -C config/sidekiq.yml
+  # worker:
+  #   <<: *app
+  #   command: bundle exec sidekiq -C config/sidekiq.yml
 
-  webpacker:
-    <<: *app
-    command: ./bin/webpack-dev-server
-    environment:
-      WEBPACKER_DEV_SERVER_HOST: 0.0.0.0
-    ports:
-      - "127.0.0.1:3035:3035"
+  # webpacker:
+  #   <<: *app
+  #   command: ./bin/webpack-dev-server
+  #   environment:
+  #     WEBPACKER_DEV_SERVER_HOST: 0.0.0.0
+  #   ports:
+  #     - "127.0.0.1:3035:3035"
 
 volumes:
   postgresql:
