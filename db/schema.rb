@@ -10,10 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_21_201059) do
+ActiveRecord::Schema.define(version: 2021_12_21_202445) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "import_orders", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "import_order_id"
+    t.text "uri"
+    t.integer "requests_count", limit: 2
+    t.text "importable_type"
+    t.string "importable_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["import_order_id"], name: "index_import_orders_on_import_order_id"
+    t.index ["user_id"], name: "index_import_orders_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.text "name"
@@ -21,4 +34,6 @@ ActiveRecord::Schema.define(version: 2021_12_21_201059) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "import_orders", "import_orders"
+  add_foreign_key "import_orders", "users"
 end
